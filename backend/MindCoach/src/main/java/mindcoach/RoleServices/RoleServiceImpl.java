@@ -1,13 +1,12 @@
-package com.example.demo.RoleServices;
+package mindcoach.RoleServices;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.demo.Role;
-
-import com.example.demo.repositories.RoleRepository;
+import mindcoach.Role;
+import mindcoach.repositories.RoleRepository;
 
 
 public class RoleServiceImpl implements RoleService{

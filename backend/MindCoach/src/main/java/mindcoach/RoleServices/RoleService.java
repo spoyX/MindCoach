@@ -1,8 +1,8 @@
-package com.example.demo.RoleServices;
+package mindcoach.RoleServices;
 
 import java.util.List;
 
-import com.example.demo.Role;
+import mindcoach.Role;
 
 
 public interface RoleService {

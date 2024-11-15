@@ -1,8 +1,8 @@
-package com.example.demo.Services;
+package mindcoach.Services;
 
 import java.util.List;
 
-import com.example.demo.*;
+import mindcoach.*;
 
 public interface UserService {
 

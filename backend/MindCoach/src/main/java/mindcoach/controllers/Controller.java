@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package mindcoach.controllers;
 
 
 
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import mindcoach.User;
+import mindcoach.Services.UserService;
 
 import org.springframework.web.bind.annotation.*;
 

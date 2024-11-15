@@ -1,4 +1,4 @@
-package MindCoach;
+package com.example.demo;
 
 import java.io.Serializable;
 import java.util.Date;

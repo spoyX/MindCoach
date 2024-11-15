@@ -1,8 +1,8 @@
-package MindCoach.Services;
+package com.example.demo.Services;
 
 import java.util.List;
 
-import MindCoach.User;
+import com.example.demo.*;
 
 public interface UserService {
 

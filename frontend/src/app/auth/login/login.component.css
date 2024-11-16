@@ -1,0 +1,4 @@
+.text-primary {
+  cursor: pointer; /* Ensures the element is clickable */
+  text-decoration: underline; /* Optional: Visual cue for links */
+}

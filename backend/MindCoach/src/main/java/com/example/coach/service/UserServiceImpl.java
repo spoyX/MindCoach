@@ -6,12 +6,18 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.coach.entity.Categorie;
 import com.example.coach.entity.User;
 import com.example.coach.entity.UserDTO;
 import com.example.coach.repo.UserRepository;
+
+
+
+
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -20,9 +26,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserDTO saveUser(UserDTO u) {
-		// TODO Auto-generated method stub
-	 return convertEntityToDto(userepository.save(convertDtoToEntity(u)));
-	}
+		 // Encode the password before saving
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword); // Set the encoded password
+        
+        // Save the user and convert to DTO
+        return convertEntityToDto(userepository.save(convertDtoToEntity(u)));
+    }
+	
 
 	@Override
 	public UserDTO updateUser(UserDTO u) {
@@ -98,6 +109,21 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userepository.findByCategorieIdCategorie(idCategorie);
 	}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	
+	
 
 	
 }

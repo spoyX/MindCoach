@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.coach.entity.User;
 import com.example.coach.entity.UserDTO;
+import com.example.coach.entity.UserRegistarionDTO;
 import com.example.coach.service.UserService;
 
 @RestController
@@ -52,6 +54,26 @@ public class UserController {
 	public List<User> getProduitsByCatId(@PathVariable("idCategorie") Long idCategorie) {
 	return s.findByCategorieIdCategorie(idCategorie);
 	}
+	
+	
+	
+	
+	
+	
+	@PostMapping("/register") // New endpoint for registration
+    public UserDTO registerUser(@RequestBody UserRegistarionDTO registrationDTO) {
+        UserDTO userDTO = UserDTO.builder()
+                .username(registrationDTO.getUsername())
+                .password(registrationDTO.getPassword()) // Pass the password; it will be encoded in the service
+                .email(registrationDTO.getEmail())
+                .nbTel(registrationDTO.getNbTel())
+                .role("USER")
+                .age(registrationDTO.getAge())
+
+                .status(false)
+                .build();
+        return s.saveUser(userDTO);
+    }
 	 
 
 }

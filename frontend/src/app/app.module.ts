@@ -9,37 +9,42 @@ import { SignupComponent } from './auth/signup/signup.component';
 
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ClientProfileComponent } from './user-profile/client-profile/client-profile.component';
-import { CoachProfileComponent } from './user-profile/coach-profile/coach-profile.component';
 import { ClientsComponent } from './admin-dashboard/clients/clients.component';
 import { CoachesComponent } from './admin-dashboard/coaches/coaches.component';
 import { DashboardComponent } from './admin-dashboard/dashboard/dashboard.component';
-
+import { MatIconModule } from '@angular/material/icon';
 
 import { StaticdashComponent } from './admin-dashboard/staticdash/staticdash.component';
 import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
+import { HttpClientModule } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    
-  
     NotfoundComponent,
     ClientProfileComponent,
-    CoachProfileComponent,
     ClientsComponent,
     CoachesComponent,
     DashboardComponent,
-  
     StaticdashComponent,
-        AdminloginComponent
+    AdminloginComponent,
+        
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

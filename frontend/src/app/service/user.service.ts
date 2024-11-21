@@ -33,4 +33,8 @@ export class UserService {
           AllCategories():Observable<Categorie[]>{
             return this.http.get<Categorie[]>(this.apiURL+"/cat");
             }
+
+  
+
+
 }

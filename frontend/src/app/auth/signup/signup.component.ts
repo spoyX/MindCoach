@@ -7,31 +7,30 @@ import { UserService } from '../../service/user.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
 
-  newUser = new user();
-  categories! : Categorie[];
-  newIdCat! : number;
-  newCategorie! : Categorie;
-  
-  constructor(private userService: UserService, private router : Router) {}
+  newUser  = new user();
+  categories!: Categorie[];
+  newIdCat!: number;
+
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.AllCategories().
-    subscribe(cats => {this.categories = cats;
-    console.log(cats);
+    this.userService.AllCategories().subscribe(cats => {
+      this.categories = cats;
+      console.log(cats);
     });
   }
-  adduser(){
-    this.newUser.categorie = this.categories.find(cat => cat.idCategorie == this.newIdCat)!;
-    this.userService.AddUser(this.newUser)
-                      .subscribe(u => {
-                      console.log(u);
-                      
-                      }); 
-    }
 
-
+  adduser() {
+    this.newUser .categorie = this.categories.find(cat => cat.idCategorie == this.newIdCat)!;
+    this.userService.AddUser (this.newUser ).subscribe(u => {
+      console.log('User  registered:', u);
+      this.router.navigate(['/login']); 
+    }, error => {
+      console.error('Error registering user', error);
+    });
+  }
 }

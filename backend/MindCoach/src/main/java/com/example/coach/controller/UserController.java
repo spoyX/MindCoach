@@ -5,6 +5,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,6 +78,44 @@ public class UserController {
                 .build();
         return s.saveUser(userDTO);
     }
+	
+	
+	
+	@PostMapping("/login") // New endpoint for registration
+    public User loginUser(@RequestBody UserDTO loginDTO) {
+		List<User>listesutils=s.findByUsername(loginDTO.getUsername());
+		User userbypwd = null;
+		
+		int index = 0;
+		int p=0;
+		if (!listesutils.isEmpty()) {
+	         // Initialize an index variable
+	        while (index < listesutils.size()) {
+	        	
+	        	User userbypwd0 = listesutils.get(index);
+	            if(passwordEncoder.matches(loginDTO.getPassword(),userbypwd0.getPassword())) {
+	            	return userbypwd=userbypwd0;
+	            	}
+	            
+	            
+	            	else {
+	      	          index++;}
+	              	 
+           
+	        }   
+	
+	        }
+		else {System.out.println("user not found");}
+		return userbypwd;
+		    
+    }
+	
+	
+	
+	
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	 
 
 }

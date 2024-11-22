@@ -13,8 +13,33 @@ import com.example.coach.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	List<User>findByUsername(String username);
 	
+	
+
+	
 	@Query("select u from User u where u.categorie = ?1")
 	List<User> findByCategorie (Categorie categorie);
 	List<User> findByCategorieIdCategorie(Long id);
 
+
+
+
+	User findByPassword(String password);
+	
+
+
+
+
+	
+
+
+
+
+	
+
+
+
+	
+	
+
+	
 }

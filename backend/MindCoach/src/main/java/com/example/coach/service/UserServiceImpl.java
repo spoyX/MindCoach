@@ -136,6 +136,24 @@ public class UserServiceImpl implements UserService{
 	
 	
 	
+	@Override
+	public User findByPassword(String password) {
+		
+		 
+	            return userepository.findByPassword(password);
+	            
+	    } 
+
+
+		
+		
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

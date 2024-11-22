@@ -14,16 +14,16 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'loginadmin', component: AdminloginComponent },
-    { path: 'client-profile', component: ClientProfileComponent },
-    { path: 'dashboard', component: DashboardComponent, 
+    { path: 'client-profile/:id', component: ClientProfileComponent },
+    { path: 'dashboard', component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'static', pathMatch: 'full' },
       { path: 'static' , component : StaticdashComponent},
       { path: 'clients', component : ClientsComponent  },
       { path: 'coachs', component : CoachesComponent  }
-  
+
   ]},
-  
+
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -31,7 +31,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { enableTracing: true })
 ],
   exports: [RouterModule],
-  
-  
+
+
 })
 export class AppRoutingModule { }

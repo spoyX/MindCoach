@@ -36,10 +36,33 @@ public class UserServiceImpl implements UserService{
 	
 
 	@Override
-	public UserDTO updateUser(UserDTO u) {
-		// TODO Auto-generated method stub
-		return convertEntityToDto(userepository.save(convertDtoToEntity(u)));
+	public UserDTO updateUser(UserDTO userDto) {
+	    // Récupérer l'utilisateur existant
+	    User existingUser = userepository.findById(userDto.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+	    
+	    // Conserver les anciennes valeurs pour le mot de passe, rôle, catégorie et statut
+	    if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
+	        userDto.setPassword(existingUser.getPassword()); // Garder l'ancien mot de passe
+	    }
+	    if (userDto.getRole() == null || userDto.getRole().isEmpty()) {
+	        userDto.setRole(existingUser.getRole()); // Garder l'ancien rôle
+	    }
+	    
+	    if (userDto.getStatus() == null) {
+	        userDto.setStatus(existingUser.getStatus()); // Garder le statut inchangé
+	    }
+
+	    // Encoder le mot de passe si nécessaire
+	    if (userDto.getPassword() != null && !userDto.getPassword().equals(existingUser.getPassword())) {
+	        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+	        userDto.setPassword(encodedPassword);
+	    }
+
+	    // Convertir en entité et sauvegarder
+	    User updatedUser = convertDtoToEntity(userDto);
+	    return convertEntityToDto(userepository.save(updatedUser));
 	}
+
 
 	@Override
 	public void deleteUser(User u) {

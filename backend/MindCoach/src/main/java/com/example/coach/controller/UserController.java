@@ -46,8 +46,9 @@ public class UserController {
 	{
 	s.deleteUserById(id);
 	}
-	@RequestMapping(method = RequestMethod.PUT)
-	public UserDTO updateProduit(@RequestBody UserDTO userDTO) {
+	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
+	public UserDTO updateUser(@PathVariable Long id,@RequestBody UserDTO userDTO) {
+		userDTO.setId(id);
 	return s.updateUser(userDTO);
 	}
 	@RequestMapping(value="/prodscat/{idCategorie}",method = RequestMethod.GET)

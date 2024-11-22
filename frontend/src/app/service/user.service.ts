@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user } from '../model/user';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Categorie } from '../model/Categorie.model';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class UserService {
 
 
   apiURL: string = 'http://localhost:8081/user';
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -28,13 +28,21 @@ export class UserService {
 
   UpdateUser(u:user){
       return this.http.put<user>(this.apiURL,u);
-      }  
-      
+      }
+
           AllCategories():Observable<Categorie[]>{
             return this.http.get<Categorie[]>(this.apiURL+"/cat");
             }
 
-  
+            getUserProfile(userId: number): Observable<user> {
+              return this.http.get<user>(`${this.apiURL}/${userId}`);
+            }
 
+            updateUserProfile(userId: number, user: user): Observable<user> {
+              return this.http.put<user>(`${this.apiURL}/${userId}`, user);
+            }
 
-}
+            deleteUserProfile(id: number): Observable<any> {
+              return this.http.delete(`${this.apiURL}/${id}`);
+            }
+          }

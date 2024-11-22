@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { user } from '../model/user';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Categorie } from '../model/Categorie.model';
+import { UserDTO } from '../model/user-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class UserService {
 
 
   apiURL: string = 'http://localhost:8081/user';
+  loginURL: string = 'http://localhost:8081/user/login';
 
 
   constructor(private http: HttpClient) { }
@@ -45,4 +47,17 @@ export class UserService {
             deleteUserProfile(id: number): Observable<any> {
               return this.http.delete(`${this.apiURL}/${id}`);
             }
-          }
+
+            // New login method
+  login(userDTO: UserDTO): Observable<any> {
+    return this.http.post<any>(this.loginURL, userDTO).pipe(
+      catchError((error) => {
+        console.error('Login error', error);
+        return throwError(error);
+      })
+    );
+  }
+}
+
+            
+          

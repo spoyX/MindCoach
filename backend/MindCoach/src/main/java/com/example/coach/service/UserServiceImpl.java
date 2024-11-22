@@ -142,23 +142,7 @@ public class UserServiceImpl implements UserService{
 		 
 	            return userepository.findByPassword(password);
 	            
-	    } 
-
-
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
+	    } 	
 	
 	
 	@Autowired

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { user } from '../model/user';
+import { Observable } from 'rxjs';
+import { Categorie } from '../model/Categorie.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +12,16 @@ export class UserService {
 
 
   apiURL: string = 'http://localhost:8081/user';
-  apiURLCat: string = 'http://localhost:8081/user/cat';
+  
+  constructor(private http: HttpClient) { }
 
-  constructor(private http : HttpClient) { }
-    
-
-  AllUser(){
+  AllUser(): Observable<user[]> {
     return this.http.get<user[]>(this.apiURL);
-    } 
-
+  }
+  
+  getbyId(): Observable<user[]> {
+    return this.http.get<user[]>(this.apiURL);
+  }
   AddUser( u: user) {
       return this.http.post<user>(this.apiURL,u);
       }
@@ -28,5 +32,16 @@ export class UserService {
 
   UpdateUser(u:user){
       return this.http.put<user>(this.apiURL,u);
-      }  
+      }      
+  // AllCategories():Observable<Categorie[]>{
+  //           return this.http.get<Categorie[]>(this.apiURL+"/cat");
+  //   }
+  viewuser(id: number) {
+      const url = `${this.apiURL}/${id}`;
+      return this.http.get<user>(url);
+      }
+      
+  AllCategories(){
+      return this.http.get<Categorie[]>(this.apiURL+"/cat");
+        }
 }

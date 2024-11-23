@@ -19,6 +19,8 @@ import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateuserComponent } from './admin-dashboard/updateuser/updateuser.component';
+import { DetailuserComponent } from './admin-dashboard/detailuser/detailuser.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     StaticdashComponent,
     AdminloginComponent,
+    UpdateuserComponent,
+    DetailuserComponent,
         
   ],
   imports: [

@@ -7,8 +7,7 @@
       
               </div>
           </div>
-      </div>
-      
+      </div>  
       <div class="row">
           <div class="col-lg-12">
               <div class="card">
@@ -19,12 +18,14 @@
                             <tr>
                               <th scope="col" style="width: 70px;">#</th>
                               <th scope="col">Username</th>
-                              <th scope="col">Password</th>
+                              
                               <th scope="col">Email</th>
-                              <th scope="col">Telephone</th>
-                              <th scope="col">Age</th>
-                              <th scope="col">Domaine</th>
+                            
+  
+                              <th scope="col">Role</th>
                               <th scope="col">Status</th>
+                            
+                              <th scope="col">Accepter/Refuser</th>
                               <th scope="col" class="text-center">Action</th> <!-- Ajout d'une classe pour aligner au centre -->
                             </tr>
                           </thead>
@@ -32,18 +33,26 @@
                             <tr *ngFor="let u of users">
                               <td>{{ u.id }}</td>
                               <td>{{ u.username }}</td>
+                              
                               <td>{{ u.email }}</td>
-                              <td> (+216){{ u.nbTel }}</td>
-                              <td>{{ u.password }}</td>
+                            
                               <td>{{ u.role }}</td>
-                              <td>{{ u.categorie?.nomCategorie || 'Non défini' }}</td>
+                              <td>{{ u.status }}</td>
+                            
+                            
                               <td>
-                                <button *ngIf="u.role === 'coach'" class="btn btn-warning">En Attente</button>
+                                <button *ngIf="u.role === 'Coach'" class="btn btn-warning">En Attente</button>
                               </td>
                               <td class="text-center">
                                 <ul class="list-inline font-size-20 contact-links mb-0">
                                   <li class="list-inline-item px-2">
-                                    <a title="Edit"><i class="bx bx-pencil" style="color: green;"></i></a>
+                                    <a title="Edit" [routerLink]="['/dashboard/update',u.id]"><i class="bx bx-pencil" style="color: green;"></i></a>
+                                  </li>
+                                  <!-- Details Icon -->
+                                 <li class="list-inline-item px-2">
+                                 <a title="Details" [routerLink]="['/dashboard/detail', u.id]">
+                                  <mat-icon style="color: #87A2FF;">visibility</mat-icon>
+                                 </a>
                                   </li>
                                   <li class="list-inline-item px-2">
                                     <a title="Delete" (click)="deleteUser(u)"><i class="bx bx-trash" style="color: red;"></i></a>
@@ -60,7 +69,6 @@
               </div>
           </div>
       </div>
-
   </div>
   <!-- container-fluid -->
 </div>

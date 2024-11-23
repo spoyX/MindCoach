@@ -15,12 +15,19 @@ export class ClientsComponent implements OnInit  {
   ngOnInit(): void {
     this.UserList();
   }
-  UserList(){
-    this.userService.AllUser().subscribe(u => {
-      console.log(u);
-      this.users = u;
-      });
-  }
+
+UserList() {
+  this.userService.AllUser().subscribe(u => {
+    console.log(u); // Vérifiez les données reçues
+    this.users = u;
+
+    // Vérifiez que chaque utilisateur a une catégorie
+    this.users.forEach(user => {
+      console.log('Nom de la catégorie:', user.categorie?.nomCategorie);
+    });
+  });
+}
+
   deleteUser(u: user)
   {
      let conf = confirm("vous vouillez supprimer ce compte de L'ID "+(u.id) +"?");

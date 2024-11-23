@@ -1,31 +1,37 @@
 import { Component } from '@angular/core';
-import { UserDTO } from '../../model/user-dto.model'; // Adjust the import path as necessary
-import { UserService } from '../../service/user.service';
-
-import { Router } from '@angular/router'; // Import Router for navigation
+import { Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: UserDTO = { username: '', password: '' }; // Initialize user with UserDTO
-  errorMessage: string = '';
+  user = { username: '', password: '' };
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
-  onSubmit() {
-    this.userService.login(this.user).subscribe({
-      next: (response) => {
-        console.log('Login successful', response);
-        // Handle successful login
-        // For example, you might want to store the user's information or token and navigate to a different page
-        this.router.navigate(['/dashboard']); // Redirect to the dashboard or home page
+  login() {
+    this.loginService.login(this.user).subscribe(
+      (response) => {
+        console.log('Login success:', response);
+
+        // Save user data in the service
+        this.loginService.saveUserData(response);
+
+        if (response.role === 'USER') {
+          this.router.navigate(['/dashboard']);
+        } else if (response.role === 'COACH') {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
-      error: (error) => {
-        console.error('Login failed', error);
-        this.errorMessage = 'Invalid username or password'; // Display error message
+      (error) => {
+        console.error('Login error:', error);
       }
-    });
+    );
   }
 }
+

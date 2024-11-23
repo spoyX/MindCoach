@@ -81,34 +81,33 @@ public class UserController {
 	
 	
 	
-	@PostMapping("/login") // New endpoint for registration
-    public User loginUser(@RequestBody UserDTO loginDTO) {
-		List<User>listesutils=s.findByUsername(loginDTO.getUsername());
-		User userbypwd = null;
-		
-		int index = 0;
-		int p=0;
-		if (!listesutils.isEmpty()) {
-	         // Initialize an index variable
-	        while (index < listesutils.size()) {
-	        	
-	        	User userbypwd0 = listesutils.get(index);
-	            if(passwordEncoder.matches(loginDTO.getPassword(),userbypwd0.getPassword())) {
-	            	return userbypwd=userbypwd0;
-	            	}
-	            
-	            
-	            	else {
-	      	          index++;}
-	              	 
-           
-	        }   
-	
+	@PostMapping("/login")
+	public UserDTO loginUser(@RequestBody UserDTO loginDTO) {
+	    List<User> userList = s.findByUsername(loginDTO.getUsername());
+	    UserDTO authenticatedUser = null;
+
+	    if (!userList.isEmpty()) {
+	        for (User user : userList) {
+	            if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+	                authenticatedUser = UserDTO.builder()
+	                    .id(user.getId())
+	                    .username(user.getUsername())
+	                    .password(user.getPassword())
+	                    .email(user.getEmail())
+	                    .age(user.getAge())
+	                    .role(user.getRole()) // Include role in the response
+	                    .status(user.getStatus())
+	                    .build();
+	                break;
+	            }
 	        }
-		else {System.out.println("user not found");}
-		return userbypwd;
-		    
-    }
+	    }
+	    if (authenticatedUser == null) {
+	        throw new RuntimeException("Invalid username or password");
+	    }
+	    return authenticatedUser;
+	}
+
 	
 	
 	
@@ -119,4 +118,3 @@ public class UserController {
 	 
 
 }
-

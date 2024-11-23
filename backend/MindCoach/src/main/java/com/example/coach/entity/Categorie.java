@@ -24,6 +24,36 @@ public class Categorie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCategorie;
+	public Long getIdCategorie() {
+		return idCategorie;
+	}
+
+
+	public void setIdCategorie(Long idCategorie) {
+		this.idCategorie = idCategorie;
+	}
+
+
+	public String getNomCategorie() {
+		return nomCategorie;
+	}
+
+
+	public void setNomCategorie(String nomCategorie) {
+		this.nomCategorie = nomCategorie;
+	}
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
 	private String nomCategorie;
 
 	

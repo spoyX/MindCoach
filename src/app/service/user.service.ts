@@ -33,9 +33,7 @@ export class UserService {
   UpdateUser(u:user){
       return this.http.put<user>(this.apiURL,u);
       }      
-  // AllCategories():Observable<Categorie[]>{
-  //           return this.http.get<Categorie[]>(this.apiURL+"/cat");
-  //   }
+
   viewuser(id: number) {
       const url = `${this.apiURL}/${id}`;
       return this.http.get<user>(url);
@@ -44,4 +42,10 @@ export class UserService {
   AllCategories(){
       return this.http.get<Categorie[]>(this.apiURL+"/cat");
         }
+
+  findByEmail(email: string): Observable<user> {
+      return this.http.get<user>(`${this.apiURL}/searchByEmail?email=${email}`);
+        }
+        
+        
 }

@@ -19,6 +19,10 @@ import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoachjoinComponent } from './auth/coachjoin/coachjoin.component';
+import { CoachDetailedComponent } from './admin-dashboard/coach-detailed/coach-detailed.component';
+import { CoachPendingComponent } from './admin-dashboard/coach-pending/coach-pending.component';
+import { PendingDetaliledComponent } from './admin-dashboard/coach-pending/pending-detaliled/pending-detaliled.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     StaticdashComponent,
     AdminloginComponent,
+    CoachjoinComponent,
+    CoachDetailedComponent,
+    CoachPendingComponent,
+    PendingDetaliledComponent,
         
   ],
   imports: [

@@ -9,7 +9,7 @@ import { user } from '../model/user';
 })
 export class UserService {
   private apiUrl = 'http://localhost:8081/user';
-
+  private coachSign='http://localhost:8081/api/coaches/'
   constructor(private http: HttpClient) {}
 
   
@@ -19,5 +19,9 @@ export class UserService {
 
   AddUser(user: user): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
+  }
+  CoachRequest(coach:any){
+   return  this.http.post(this.coachSign +'request' ,coach, {
+    responseType: 'text'} )
   }
 }

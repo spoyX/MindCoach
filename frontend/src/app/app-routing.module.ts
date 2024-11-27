@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'loginadmin', component: AdminloginComponent },
     { path: 'client-profile/:id', component: ClientProfileComponent , canActivate:[LoginGuard]},
-    { path: 'dashboard', component: DashboardComponent,
+    { path: 'dashboard', component: DashboardComponent, canActivate:[LoginGuard],
     children: [
       { path: '', redirectTo: 'static', pathMatch: 'full' },
       { path: 'static' , component : StaticdashComponent},

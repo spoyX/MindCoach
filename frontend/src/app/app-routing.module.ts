@@ -16,36 +16,38 @@ import { PendingDetaliledComponent } from './admin-dashboard/coach-pending/pendi
 import { UpdateClientComponent } from './admin-dashboard/clients/update-client/update-client.component';
 import { DetailClientComponent } from './admin-dashboard/clients/detail-client/detail-client.component';
 import { UpdateCoachComponent } from './admin-dashboard/coaches/update-coach/update-coach.component';
+import { LoginGuard } from './service/guards/login.guard.service';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  {path:'coachrequest',component:CoachjoinComponent},
+  { path: 'coachrequest', component: CoachjoinComponent },
   { path: 'loginadmin', component: AdminloginComponent },
-    { path: 'client-profile', component: ClientProfileComponent },
-    { path: 'dashboard', component: DashboardComponent, 
+  
+  { path: 'client-profile', component: ClientProfileComponent },
+  { path: 'client-profile/:id', component: ClientProfileComponent, canActivate: [LoginGuard] },
+  
+  { path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard],
     children: [
       { path: '', redirectTo: 'static', pathMatch: 'full' },
-      { path: 'static' , component : StaticdashComponent},
-      { path: 'clients', component : ClientsComponent  },
-      {path:'clientsUpdate/:id',component:UpdateClientComponent},
-      { path:'clientDetail/:id',component:DetailClientComponent},
-      { path: 'coachs', component : CoachesComponent  },
-      {path:'coachDetailed/:id',component:CoachDetailedComponent},
-      {path:'coachUpdate/:id',component:UpdateCoachComponent},
-      {path:'coachPending',component:CoachPendingComponent},
-      { path: 'pendingId/:id',component:PendingDetaliledComponent}
-  
-  ]},
+      { path: 'static', component: StaticdashComponent },
+      { path: 'clients', component: ClientsComponent },
+      { path: 'clientsUpdate/:id', component: UpdateClientComponent },
+      { path: 'clientDetail/:id', component: DetailClientComponent },
+      { path: 'coachs', component: CoachesComponent },
+      { path: 'coachDetailed/:id', component: CoachDetailedComponent },
+      { path: 'coachUpdate/:id', component: UpdateCoachComponent },
+      { path: 'coachPending', component: CoachPendingComponent },
+      { path: 'pendingId/:id', component: PendingDetaliledComponent }
+    ]
+  },
   
   { path: '**', component: NotfoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })
-],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule],
-  
-  
 })
 export class AppRoutingModule { }

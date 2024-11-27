@@ -44,9 +44,10 @@ export class SignupComponent implements OnInit {
     this.newUser .categorie = this.categories.find(cat => cat.idCategorie == this.newIdCat)!;
     this.userService.AddUser (this.newUser ).subscribe(u => {
       console.log('User  registered:', u);
-      this.router.navigate(['/login']); 
+      this.router.navigate(['/login']);
     }, error => {
       console.error('Error registering user', error);
     });
   }
 }
+

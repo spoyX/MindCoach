@@ -8,6 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.InheritanceType;
+
+
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
@@ -41,7 +45,6 @@ public User() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-
 
 
 public Long getId() {
@@ -101,5 +104,51 @@ public void setCategorie(Categorie categorie) {
 }
 
 
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

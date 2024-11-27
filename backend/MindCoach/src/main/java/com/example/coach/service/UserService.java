@@ -20,5 +20,17 @@ public interface UserService {
 	UserDTO convertEntityToDto (User user);
 	User convertDtoToEntity(UserDTO userDto); 
 	List<User> findByCategorieIdCategorie(Long idCategorie);
+	User findByPassword(String password);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

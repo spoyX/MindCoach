@@ -68,40 +68,97 @@ public class UserController {
 	        return user.map(ResponseEntity::ok) // Renvoie l'utilisateur directement
 	                   .orElseGet(() -> ResponseEntity.notFound().build());
 	    }
-      @PostMapping("/login")
-	public UserDTO loginUser(@RequestBody UserDTO loginDTO) {
-	    List<User> userList = s.findByUsername(loginDTO.getUsername());
-	    UserDTO authenticatedUser = null;
+	 
+	 
+	 
+	 
+	 
 
-	    if (!userList.isEmpty()) {
-	        for (User user : userList) {
-	            if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
-	                authenticatedUser = UserDTO.builder()
-	                    .id(user.getId())
-	                    .username(user.getUsername())
-	                    .password(user.getPassword())
-	                    .email(user.getEmail())
-	                    .age(user.getAge())
-	                    .role(user.getRole()) // Include role in the response
-	                    .status(user.getStatus())
-	                    .build();
-	                break;
-	            }
-	        }
-	    }
-	    if (authenticatedUser == null) {
-	        throw new RuntimeException("Invalid username or password");
-	    }
-	    return authenticatedUser;
-	}
+	 @PostMapping("/login")
+		public UserDTO loginUser(@RequestBody UserDTO loginDTO) {
+		    List<User> userList = s.findByUsername(loginDTO.getUsername());
+		    UserDTO authenticatedUser = null;
 
-	
-	
-	
-	
-	
-	@Autowired
-    private PasswordEncoder passwordEncoder;
+		    if (!userList.isEmpty()) {
+		        for (User user : userList) {
+		            if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+		                authenticatedUser = UserDTO.builder()
+		                    .id(user.getId())
+		                    .username(user.getUsername())
+		                    .password(user.getPassword())
+		                    .email(user.getEmail())
+		                    .age(user.getAge())
+		                    .role(user.getRole()) // Include role in the response
+		                    .status(user.getStatus())
+		                    .build();
+		                break;
+		            }
+		        }
+		    }
+		    if (authenticatedUser == null) {
+		        throw new RuntimeException("Invalid username or password");
+		    }
+		    return authenticatedUser;
+		}
+
+		
+		
+		
+		
+		
+		@Autowired
+	    private PasswordEncoder passwordEncoder;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		@RequestMapping(value="/{id}",method = RequestMethod.PUT)
+		public UserDTO updateUser(@PathVariable Long id,@RequestBody UserDTO userDTO) {
+			userDTO.setId(id);
+		return s.updateUser(userDTO);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
 	 
 }
 	

@@ -48,5 +48,22 @@ public class UserRegistarionDTO {
 	    private String email;
 	    private String nbTel;
 	    private Integer age;
-
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 }

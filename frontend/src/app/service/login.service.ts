@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class LoginService {
   private baseUrl = 'http://localhost:8081/user';
+  getUser: any;
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,7 @@ export class LoginService {
   saveUserData(userData: any): void {
     localStorage.setItem('username', userData.username);
     localStorage.setItem('role', userData.role);
+    localStorage.setItem('userId', userData.id); // Save the user ID
   }
 
   // Method to clear user data on logout
@@ -32,10 +34,15 @@ export class LoginService {
     return localStorage.getItem('role');
   }
 
+
   getUsername(): string | null {
     return localStorage.getItem('username');
   }
 
+  getUserId(): number | null {
+    const userId = localStorage.getItem('userId');
+    return userId ? +userId : null; // Convert to number or return null
+  }
 
 
   isAuthenticated(): Observable<boolean> {

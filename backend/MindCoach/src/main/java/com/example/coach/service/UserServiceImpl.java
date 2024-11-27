@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.coach.entity.Categorie;
 import com.example.coach.entity.User;
 import com.example.coach.entity.UserDTO;
+import com.example.coach.repo.CategoryRepository;
 import com.example.coach.repo.UserRepository;
 
 
@@ -114,7 +115,10 @@ public class UserServiceImpl implements UserService{
 	
 	
 	
-	
+	@Override
+    public User findByPassword(String password) {
+        return userepository.findByPassword(password);
+    }
 	
 
 	
@@ -122,6 +126,20 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
     private PasswordEncoder passwordEncoder;
+	
+	
+	
+	
+
+	
+	 
+
+	    @Autowired
+	    private CategoryRepository categoryRepository;
+
+	    
+
+	
 	
 	
 

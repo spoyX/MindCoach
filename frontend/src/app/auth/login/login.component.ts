@@ -41,8 +41,4 @@ export class LoginComponent {
       }
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bbbc4229db4945ac115dfb548c27421261d75111

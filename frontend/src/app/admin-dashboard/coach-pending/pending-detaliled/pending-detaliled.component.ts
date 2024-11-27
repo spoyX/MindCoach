@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pending-detaliled',
@@ -31,7 +32,13 @@ export class PendingDetaliledComponent {
   processDecision(id: any, decision: string): void {
     this.userService.decision(id, decision).subscribe({
       next: (response) => {
-        console.log(response);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
          
       },
       error: (err) => console.error('Error processing decision:', err),

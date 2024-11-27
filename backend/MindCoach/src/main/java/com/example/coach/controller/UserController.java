@@ -1,21 +1,26 @@
 package com.example.coach.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.coach.entity.User;
 import com.example.coach.entity.UserDTO;
 import com.example.coach.entity.UserRegistarionDTO;
+import com.example.coach.repo.UserRepository;
 import com.example.coach.service.UserService;
 
 @RestController
@@ -24,6 +29,8 @@ import com.example.coach.service.UserService;
 public class UserController {
 	@Autowired
 	UserService s;
+	 @Autowired 
+	UserRepository userRepo;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public List<UserDTO> getAllUsers() {
@@ -54,27 +61,47 @@ public class UserController {
 	public List<User> getProduitsByCatId(@PathVariable("idCategorie") Long idCategorie) {
 	return s.findByCategorieIdCategorie(idCategorie);
 	}
-	
-	
-	
-	
-	
-	
-	@PostMapping("/register") // New endpoint for registration
-    public UserDTO registerUser(@RequestBody UserRegistarionDTO registrationDTO) {
-        UserDTO userDTO = UserDTO.builder()
-                .username(registrationDTO.getUsername())
-                .password(registrationDTO.getPassword()) // Pass the password; it will be encoded in the service
-                .email(registrationDTO.getEmail())
-                .nbTel(registrationDTO.getNbTel())
-                .role("USER")
-                .age(registrationDTO.getAge())
+	 @GetMapping("/searchByEmail")
+	    public ResponseEntity<User> findByEmail(@RequestParam String email) {
+	        Optional<User> user = userRepo.findByEmail(email);
 
-                .status(false)
-                .build();
-        return s.saveUser(userDTO);
-    }
+	        return user.map(ResponseEntity::ok) // Renvoie l'utilisateur directement
+	                   .orElseGet(() -> ResponseEntity.notFound().build());
+	    }
+      @PostMapping("/login")
+	public UserDTO loginUser(@RequestBody UserDTO loginDTO) {
+	    List<User> userList = s.findByUsername(loginDTO.getUsername());
+	    UserDTO authenticatedUser = null;
+
+	    if (!userList.isEmpty()) {
+	        for (User user : userList) {
+	            if (passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+	                authenticatedUser = UserDTO.builder()
+	                    .id(user.getId())
+	                    .username(user.getUsername())
+	                    .password(user.getPassword())
+	                    .email(user.getEmail())
+	                    .age(user.getAge())
+	                    .role(user.getRole()) // Include role in the response
+	                    .status(user.getStatus())
+	                    .build();
+	                break;
+	            }
+	        }
+	    }
+	    if (authenticatedUser == null) {
+	        throw new RuntimeException("Invalid username or password");
+	    }
+	    return authenticatedUser;
+	}
+
+	
+	
+	
+	
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	 
-
 }
-
+	

@@ -44,16 +44,39 @@ export class UserService {
   DeleteUser(id:number){
         return this.http.delete(this.apiURL+"/"+id);
       }
+      UpdateCoach(id: number, coach: any) {
+        return this.http.put(`${this.coachSign}update/${id}`, coach);
+      }
 
-  UpdateUser(u:user){
-      return this.http.put<user>(this.apiURL,u);
-      }  
-      
-          AllCategories():Observable<Categorie[]>{
-            return this.http.get<Categorie[]>(this.apiURL+"/cat");
-            }
-
+      UpdateUser(u:user){
+        return this.http.put<user>(this.apiURL,u);
+        }      
   
+    viewuser(id: number) {
+        const url = `${this.apiURL}/${id}`;
+        return this.http.get<user>(url);
+        }
+        
+    AllCategories(){
+        return this.http.get<Categorie[]>(this.apiURL+"/cat");
+          }
+  
+    findByEmail(email: string): Observable<user> {
+        return this.http.get<user>(`${this.apiURL}/searchByEmail?email=${email}`);
+          }
+          
+
+          getUserProfile(userId: number): Observable<user> {
+            return this.http.get<user>(`${this.apiURL}/${userId}`);
+          }
+
+          updateUserProfile(userId: number, user: user): Observable<user> {
+            return this.http.put<user>(`${this.apiURL}/${userId}`, user);
+          }
+
+          deleteUserProfile(id: number): Observable<any> {
+            return this.http.delete(`${this.apiURL}/${id}`);
+          }
 
 
 }

@@ -13,6 +13,9 @@ import { CoachjoinComponent } from './auth/coachjoin/coachjoin.component';
 import { CoachDetailedComponent } from './admin-dashboard/coach-detailed/coach-detailed.component';
 import { CoachPendingComponent } from './admin-dashboard/coach-pending/coach-pending.component';
 import { PendingDetaliledComponent } from './admin-dashboard/coach-pending/pending-detaliled/pending-detaliled.component';
+import { UpdateClientComponent } from './admin-dashboard/clients/update-client/update-client.component';
+import { DetailClientComponent } from './admin-dashboard/clients/detail-client/detail-client.component';
+import { UpdateCoachComponent } from './admin-dashboard/coaches/update-coach/update-coach.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
@@ -25,8 +28,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'static', pathMatch: 'full' },
       { path: 'static' , component : StaticdashComponent},
       { path: 'clients', component : ClientsComponent  },
+      {path:'clientsUpdate/:id',component:UpdateClientComponent},
+      { path:'clientDetail/:id',component:DetailClientComponent},
       { path: 'coachs', component : CoachesComponent  },
       {path:'coachDetailed/:id',component:CoachDetailedComponent},
+      {path:'coachUpdate/:id',component:UpdateCoachComponent},
       {path:'coachPending',component:CoachPendingComponent},
       { path: 'pendingId/:id',component:PendingDetaliledComponent}
   

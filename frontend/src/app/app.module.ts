@@ -23,6 +23,9 @@ import { CoachjoinComponent } from './auth/coachjoin/coachjoin.component';
 import { CoachDetailedComponent } from './admin-dashboard/coach-detailed/coach-detailed.component';
 import { CoachPendingComponent } from './admin-dashboard/coach-pending/coach-pending.component';
 import { PendingDetaliledComponent } from './admin-dashboard/coach-pending/pending-detaliled/pending-detaliled.component';
+import { UpdateClientComponent } from './admin-dashboard/clients/update-client/update-client.component';
+import { DetailClientComponent } from './admin-dashboard/clients/detail-client/detail-client.component';
+import { UpdateCoachComponent } from './admin-dashboard/coaches/update-coach/update-coach.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { PendingDetaliledComponent } from './admin-dashboard/coach-pending/pendi
     CoachDetailedComponent,
     CoachPendingComponent,
     PendingDetaliledComponent,
+    UpdateClientComponent,
+    DetailClientComponent,
+    UpdateCoachComponent,
         
   ],
   imports: [

@@ -1,10 +1,10 @@
 <div style="margin-top: 80px;">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center">
               <thead class="table-light">
                 <tr>
                   <th colspan="2" class="text-center">Coach Details</th>
@@ -48,13 +48,22 @@
                   <td>{{ coachDetails.age }}</td>
                 </tr>
               </tbody>
+
               <tbody *ngIf="!coachDetails">
                 <tr>
-                  <td colspan="2" class="text-center">No Data Founded...</td>
+                  <td colspan="2" class="text-center">No Data Found...</td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <!-- Back to Dashboard Button -->
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary btn-lg"  routerLink="/dashboard/coachs">
+              Back to Dashboard
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.coach.entity.Coach;
@@ -95,6 +96,24 @@ public ResponseEntity<String> processDecision(
         );
         return ResponseEntity.ok("Coach rejected and email sent.");
     }
+}
+
+@RequestMapping(value="/update/{id}",method = RequestMethod.PUT)
+
+public ResponseEntity<Coach> updateCoach(@PathVariable Long id, @RequestBody Coach updatedCoach) {
+    Coach coach = coachRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Coach not found with ID: " + id));
+
+    // Update fields
+    coach.setUsername(updatedCoach.getUsername());
+    coach.setEmail(updatedCoach.getEmail());
+    coach.setnbTel(updatedCoach.getnbTel());
+    coach.setExpertise(updatedCoach.getExpertise());
+    coach.setStatus(updatedCoach.getStatus());
+
+    // Save updated coach to the repository
+    Coach savedCoach = coachRepository.save(coach);
+    return ResponseEntity.ok(savedCoach);
 }
 
 }

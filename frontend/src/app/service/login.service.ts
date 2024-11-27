@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private baseUrl = 'http://localhost:8081/user'; // Backend API URL
+  private baseUrl = 'http://localhost:8081/user';
 
   constructor(private http: HttpClient) {}
 
-  // Login method to send user credentials to the backend
-  login(user: { username: string; password: string }): Observable<any> {
+
+  login(user: { username: string; password: string}): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, user);
   }
 
@@ -34,5 +34,12 @@ export class LoginService {
 
   getUsername(): string | null {
     return localStorage.getItem('username');
+  }
+
+
+
+  isAuthenticated(): Observable<boolean> {
+    const username = localStorage.getItem('username');
+    return of(!!username); // Return true if username exists, false otherwise
   }
 }

@@ -9,12 +9,14 @@ import { ClientsComponent } from './admin-dashboard/clients/clients.component';
 import { CoachesComponent } from './admin-dashboard/coaches/coaches.component';
 import { StaticdashComponent } from './admin-dashboard/staticdash/staticdash.component';
 import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
+import { LoginService } from './service/login.service';
+import { LoginGuard } from './service/guards/login.guard.service';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'loginadmin', component: AdminloginComponent },
-    { path: 'client-profile/:id', component: ClientProfileComponent },
+    { path: 'client-profile/:id', component: ClientProfileComponent , canActivate:[LoginGuard]},
     { path: 'dashboard', component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'static', pathMatch: 'full' },

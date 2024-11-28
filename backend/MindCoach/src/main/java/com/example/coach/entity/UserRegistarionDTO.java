@@ -43,11 +43,18 @@ public class UserRegistarionDTO {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	private String username;
 	    private String password;
 	    private String email;
 	    private String nbTel;
 	    private Integer age;
+	    private String role;
 	    
 	    
 	    

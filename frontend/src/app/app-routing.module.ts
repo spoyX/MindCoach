@@ -17,6 +17,7 @@ import { UpdateClientComponent } from './admin-dashboard/clients/update-client/u
 import { DetailClientComponent } from './admin-dashboard/clients/detail-client/detail-client.component';
 import { UpdateCoachComponent } from './admin-dashboard/coaches/update-coach/update-coach.component';
 import { LoginGuard } from './service/guards/login.guard.service';
+import { AdminLoginGuardServiceService } from './service/guards/admin.login.guard.service.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,11 +25,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'coachrequest', component: CoachjoinComponent },
   { path: 'loginadmin', component: AdminloginComponent },
-  
+
   { path: 'client-profile', component: ClientProfileComponent },
   { path: 'client-profile/:id', component: ClientProfileComponent, canActivate: [LoginGuard] },
-  
-  { path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard],
+
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AdminLoginGuardServiceService],
     children: [
       { path: '', redirectTo: 'static', pathMatch: 'full' },
       { path: 'static', component: StaticdashComponent },
@@ -42,7 +43,7 @@ const routes: Routes = [
       { path: 'pendingId/:id', component: PendingDetaliledComponent }
     ]
   },
-  
+
   { path: '**', component: NotfoundComponent }
 ];
 

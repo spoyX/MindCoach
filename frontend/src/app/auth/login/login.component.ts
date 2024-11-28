@@ -26,10 +26,10 @@ export class LoginComponent {
         if (response.role === 'USER') {
           this.router.navigate([`client-profile/${response.id}`]);
           return response.id;
-        } else if (response.role === 'COACH') {
-          this.router.navigate(['/dashboard']);
+        } else if (response.role === 'ADMIN') {
+          this.router.navigate(['/loginadmin']);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['']);
         }
 
         // Clear any previous error message

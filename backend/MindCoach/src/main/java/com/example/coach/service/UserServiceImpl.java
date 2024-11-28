@@ -1,6 +1,7 @@
 package com.example.coach.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -119,6 +120,9 @@ public class UserServiceImpl implements UserService{
     public User findByPassword(String password) {
         return userepository.findByPassword(password);
     }
+	
+	
+	
 	
 
 	
